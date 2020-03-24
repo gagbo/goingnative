@@ -1,5 +1,8 @@
 #include <nan.h>
 #include <iostream>
+#ifndef _WIN32
+#include <unistd.h>
+#endif
 
 using namespace v8;
 
@@ -27,6 +30,19 @@ NAN_METHOD(StrLen) {
   }
 }
 
+NAN_METHOD(Delay) {
+  Nan::HandleScope scope;
+  auto msDelay = Nan::To<int>(info[0]);
+  auto delay = msDelay.FromJust();
+#ifdef _WIN32
+  Sleep(delay);
+#else
+  usleep(delay * 1000);
+#endif
+  auto callback = info[1].As<Function>();
+  Nan::MakeCallback(Nan::GetCurrentContext()->Global(), callback, 0, NULL);
+}
+
 NAN_MODULE_INIT(Init) {
   Nan::Set(target, Nan::New("print").ToLocalChecked(),
       Nan::GetFunction(Nan::New<FunctionTemplate>(Print)).ToLocalChecked());
@@ -34,6 +50,8 @@ NAN_MODULE_INIT(Init) {
       Nan::GetFunction(Nan::New<FunctionTemplate>(PrintArg)).ToLocalChecked());
   Nan::Set(target, Nan::New("length").ToLocalChecked(),
       Nan::GetFunction(Nan::New<FunctionTemplate>(StrLen)).ToLocalChecked());
+  Nan::Set(target, Nan::New("delay").ToLocalChecked(),
+      Nan::GetFunction(Nan::New<FunctionTemplate>(Delay)).ToLocalChecked());
 }
 
 NODE_MODULE(myaddon, Init)
