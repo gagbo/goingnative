@@ -1,4 +1,8 @@
 var bindings = require('bindings')
 var addon = bindings('myaddon')
 
-addon.print()
+const arg = process.argv[2]
+
+//addon.print()
+//addon.print_with_arg(arg)
+console.log(addon.length(arg))

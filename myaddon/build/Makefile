@@ -309,7 +309,7 @@ endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
 cmd_regen_makefile = cd $(srcdir); /home/gagbobada/.config/yarn/global/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/gagbobada/.cache/node-gyp/6.17.1" "-Dnode_gyp_dir=/home/gagbobada/.config/yarn/global/node_modules/node-gyp" "-Dnode_lib_file=/home/gagbobada/.cache/node-gyp/6.17.1/<(target_arch)/node.lib" "-Dmodule_root_dir=/home/gagbobada/soft/goingnative/myaddon" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/home/gagbobada/soft/goingnative/myaddon/build/config.gypi -I/home/gagbobada/.config/yarn/global/node_modules/node-gyp/addon.gypi -I/home/gagbobada/.cache/node-gyp/6.17.1/include/node/common.gypi "--toplevel-dir=." binding.gyp
-Makefile: $(srcdir)/../../../.cache/node-gyp/6.17.1/include/node/common.gypi $(srcdir)/../../../.config/yarn/global/node_modules/node-gyp/addon.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
+Makefile: $(srcdir)/build/config.gypi $(srcdir)/binding.gyp $(srcdir)/../../../.cache/node-gyp/6.17.1/include/node/common.gypi $(srcdir)/../../../.config/yarn/global/node_modules/node-gyp/addon.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included
