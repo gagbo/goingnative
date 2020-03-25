@@ -6,6 +6,59 @@
 
 using namespace v8;
 
+// A worker class extending the NanAsyncWorker helper
+// class, a simple encapsulation of worker-thread
+// logic to make simple tasks easier
+
+class MyWorker : public Nan::AsyncWorker {
+ public:
+  // Constructor
+  MyWorker(Nan::Callback *callback, int delay)
+    : Nan::AsyncWorker(callback), delay(delay) {}
+  // Destructor
+  ~MyWorker() {}
+
+  // Executed inside the worker-thread.
+  // It is not safe to access V8, or V8 data structures
+  // here, so everything we need for input and output
+  // should go on `this`.
+  void Execute () {
+#ifdef _WIN32
+  Sleep(delay);
+#else
+  usleep(delay * 1000);
+#endif
+  }
+
+  // Executed when the async work is complete
+  // this function will be run inside the main event loop
+  // so it is safe to use V8 again
+  void HandleOKCallback () {
+    Nan::HandleScope scope;
+
+    // Nan::Callback#Call() does a Nan::MakeCallback() for us
+    callback->Call(0, NULL);
+  }
+
+ private:
+  int delay;
+};
+
+NAN_METHOD(Delay) {
+  // get delay and callback
+  Nan::HandleScope scope;
+  auto msDelay = Nan::To<int>(info[0]);
+  auto delay = msDelay.FromJust();
+  auto callback = info[1].As<Function>();
+
+  // create NanCallback instance wrapping the callback
+  auto nanCallback = new Nan::Callback(callback);
+  // create a MyWorker instance, passing the callback and delay
+  auto worker = new MyWorker(nanCallback, delay);
+  // queue the worker instance onto the thread-pool
+  Nan::AsyncQueueWorker(worker);
+}
+
 NAN_METHOD(Print) {
   std::cout << "I am a native addon and I AM ALIVE!" << std::endl;
   // info.GetReturnValue().Set()
@@ -28,19 +81,6 @@ NAN_METHOD(StrLen) {
     auto retVal = Nan::New<Number>(len);
     info.GetReturnValue().Set(retVal);
   }
-}
-
-NAN_METHOD(Delay) {
-  Nan::HandleScope scope;
-  auto msDelay = Nan::To<int>(info[0]);
-  auto delay = msDelay.FromJust();
-#ifdef _WIN32
-  Sleep(delay);
-#else
-  usleep(delay * 1000);
-#endif
-  auto callback = info[1].As<Function>();
-  Nan::MakeCallback(Nan::GetCurrentContext()->Global(), callback, 0, NULL);
 }
 
 NAN_MODULE_INIT(Init) {
