@@ -1,11 +1,11 @@
-name: coin-integration-alpha
+name: Publish
 defaults:
   run:
     working-directory: goingnative-addon
 on:
   push:
     branches:
-      - 'int-*'
+      - 'master'
 jobs:
   prebuild-for-platform:
     runs-on: ${{ matrix.os }}
@@ -19,9 +19,6 @@ jobs:
       - uses: actions/setup-python@v1
         with:
           python-version: '2.7.x'
-      - name: extract coin name
-        run: |
-            COIN=$(./extract-coin-name.sh)
       - name: install
         run: yarn --frozen-lockfile --ignore-scripts
       - name: config gcc
@@ -33,5 +30,5 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GAGBO_PUBLISH_TOKEN }}
         run: |
-            yarn version --prerelease --preid "$COIN"
-            yarn publish --tag "$COIN"
+            yarn version --minor
+            yarn publish
