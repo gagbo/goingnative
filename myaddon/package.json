@@ -2,6 +2,10 @@
   "name": "goingnative-addon",
   "version": "1.0.0",
   "description": "Following goingnative tutorial",
+  "engines": {
+      "node": "<7.0"
+  },
+  "engineStrict": true,
   "main": "index.js",
   "scripts": {
     "install": "node-gyp rebuild"
