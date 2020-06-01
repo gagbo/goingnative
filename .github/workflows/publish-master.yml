@@ -31,7 +31,7 @@ jobs:
       - name: publish on NPM
         run: |
             echo "I hope you remembered to run 'yarn version --minor'"
-            yarn publish
+            npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GAGBO_PUBLISH_TOKEN }}
       - name: publish on Github

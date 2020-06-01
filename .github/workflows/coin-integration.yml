@@ -34,6 +34,6 @@ jobs:
       - name: Get version and publish @coin on NPM
         run: |
             echo "I hope you remembered to run 'yarn version --prerelease --preid \"$COIN\"'"
-            yarn publish --tag "$COIN"
+            npm publish --tag "$COIN"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GAGBO_PUBLISH_TOKEN }}
