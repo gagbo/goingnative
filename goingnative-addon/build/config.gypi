@@ -61,7 +61,22 @@
     "v8_trace_maps": 0,
     "v8_use_snapshot": "true",
     "want_separate_host_toolset": 0,
-    "nodedir": "/home/gagbobada/.cache/node-gyp/6.17.1",
-    "standalone_static_library": 1
+    "nodedir": "/home/gagbobada/.node-gyp/6.17.1",
+    "copy_dev_lib": "true",
+    "standalone_static_library": 1,
+    "version_commit_hooks": "true",
+    "user_agent": "yarn/1.21.1 npm/? node/v6.17.1 linux x64",
+    "bin_links": "true",
+    "init_version": "1.0.0",
+    "init_license": "MIT",
+    "version_tag_prefix": "v",
+    "registry": "https://registry.yarnpkg.com",
+    "ignore_scripts": "",
+    "version_git_message": "v%s",
+    "version_git_tag": "true",
+    "version_git_sign": "",
+    "strict_ssl": "true",
+    "save_prefix": "^",
+    "ignore_optional": ""
   }
 }
