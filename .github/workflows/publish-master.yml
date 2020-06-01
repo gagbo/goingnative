@@ -17,6 +17,7 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 6.x
+          always-auth: true
       - uses: actions/setup-python@v1
         with:
           python-version: '2.7.x'
