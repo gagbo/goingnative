@@ -29,14 +29,11 @@ jobs:
         run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
       - name: prebuild for node 6
         run: npx node-pre-gyp configure build package --target=6.17.1
-      - name: Extract coin name
-        run: echo "::set-output name=coin::$(echo ${GITHUB_REF#refs/heads/int-})"
-        id: extract_coin
       - name: Get version and publish @coin on NPM
         if: matrix.os == 'ubuntu-18.04'
         run: |
+            export COIN=$(echo ${GITHUB_REF#refs/heads/int-})
             echo "I hope you remembered to run 'yarn version --prerelease --preid \"$COIN\"'"
             yarn publish --tag "$COIN"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GAGBO_PUBLISH_TOKEN }}
-          COIN: ${{ steps.extract_coin.output.coin }}
