@@ -6,6 +6,12 @@
       "node": "<7.0"
   },
   "engineStrict": true,
+  "binary": {
+    "module_name": "goingnative-addon",
+    "module_path": "./build/Release",
+    "host": "https://github.com/gagbo/goingnative/releases/download/",
+    "remote_path": "{version}"
+  },
   "main": "index.js",
   "scripts": {
     "install": "node-gyp rebuild"

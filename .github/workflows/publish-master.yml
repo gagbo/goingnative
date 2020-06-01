@@ -27,9 +27,13 @@ jobs:
         run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
       - name: prebuild for node 6
         run: npx node-pre-gyp configure build package --target=6.17.1
-      - name: Get version and publish @coin on NPM
+      - name: publish on NPM
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GAGBO_PUBLISH_TOKEN }}
         run: |
             yarn version --minor
             yarn publish
+      - name: publish on Github
+        env:
+          NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN }}
+        run: npx node-pre-gyp-github publish
