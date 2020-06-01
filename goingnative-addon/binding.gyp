@@ -13,6 +13,10 @@
         'OTHER_CFLAGS': [
           '-std=c++11',
           '-stdlib=libc++'
+        ],
+        'OTHER_CPLUSPLUSFLAGS': [
+          '-std=c++11',
+          '-stdlib=libc++'
         ]
       }
     }]]
