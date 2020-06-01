@@ -1,0 +1,18 @@
+#+TITLE: Native Addons and Github NPM publish tests
+
+I advise against using this for any reason. I am using this repository to learn
+and test :
+- native addons writing / packaging
+- publishing to NPM using automated github actions.
+
+* Parts
+** Goingnative-addon
+This is a follow along of the nice goingnative tutorial to learn how to write
+native addons for Node.
+
+This also includes a package.json that tries to clamp the version of Node, since
+the tutorial hasn't been updated to work with Node 12 at least.
+
+** Github actions
+Various publish actions using Github CI secrets are also tested to see how the
+package can be deployed.
