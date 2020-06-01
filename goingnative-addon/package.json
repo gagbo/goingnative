@@ -1,6 +1,6 @@
 {
   "name": "goingnative-addon",
-  "version": "2.3.1-ethereum-classic.0",
+  "version": "2.4.0",
   "description": "Following goingnative tutorial",
   "main": "index.js",
   "repository": {
