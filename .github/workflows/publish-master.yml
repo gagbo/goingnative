@@ -27,6 +27,9 @@ jobs:
       - name: config gcc
         if: runner.os == 'Linux'
         run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+      - name: config npm
+        if: runner.os == 'Windows'
+        run: npm config set msvs_version 2015
       - name: prebuild for node 6
         run: npx node-pre-gyp configure build package --target=6.17.1
       - name: publish on NPM
