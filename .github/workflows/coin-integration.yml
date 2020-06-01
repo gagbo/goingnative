@@ -24,7 +24,7 @@ jobs:
           python-version: '2.7.x'
       - name: extract coin name
         run: |
-            COIN=$(./extract-coin-name.sh)
+            export COIN=$(./extract-coin-name.sh)
       - name: install
         run: yarn --frozen-lockfile --ignore-scripts
       - name: config gcc
