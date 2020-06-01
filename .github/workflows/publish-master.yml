@@ -30,6 +30,7 @@ jobs:
       - name: prebuild for node 6
         run: npx node-pre-gyp configure build package --target=6.17.1
       - name: publish on NPM
+        if: matrix.os == 'ubuntu-18.04'
         run: |
             echo "I hope you remembered to run 'yarn version --minor'"
             yarn publish
