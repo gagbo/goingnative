@@ -1,6 +1,6 @@
 {
   "name": "goingnative-addon",
-  "version": "2.2.2-dogecoin.2",
+  "version": "2.2.2-dogecoin.3",
   "description": "Following goingnative tutorial",
   "main": "index.js",
   "repository": {
