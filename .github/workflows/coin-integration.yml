@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: 6.x
           always-auth: true
+      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_GAGBO_PUBLISH_TOKEN }}" > ~/.npmrc
       - uses: actions/setup-python@v1
         with:
           python-version: '2.7.x'
@@ -34,6 +35,6 @@ jobs:
       - name: Get version and publish @coin on NPM
         run: |
             echo "I hope you remembered to run 'yarn version --prerelease --preid \"$COIN\"'"
-            npm publish --tag "$COIN"
+            yarn publish --tag "$COIN"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GAGBO_PUBLISH_TOKEN }}
