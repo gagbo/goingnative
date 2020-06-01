@@ -31,7 +31,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GAGBO_PUBLISH_TOKEN }}
         run: |
-            yarn version --minor
+            echo "I hope you remembered to run 'yarn version --minor'"
             yarn publish
       - name: publish on Github
         env:
