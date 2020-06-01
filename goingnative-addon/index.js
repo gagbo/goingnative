@@ -1,5 +1,5 @@
 var bindings = require('bindings')
-var addon = bindings('myaddon')
+var addon = bindings('goingnative-addon')
 
 const arg1 = process.argv[2]
 
