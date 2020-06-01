@@ -22,9 +22,6 @@ jobs:
       - uses: actions/setup-python@v1
         with:
           python-version: '2.7.x'
-      - name: extract coin name
-        run: |
-            export COIN=$(./extract-coin-name.sh)
       - name: install
         run: yarn --frozen-lockfile --ignore-scripts
       - name: config gcc
@@ -35,6 +32,7 @@ jobs:
       - name: Get version and publish @coin on NPM
         if: matrix.os == 'ubuntu-18.04'
         run: |
+            export COIN=$(./extract-coin-name.sh)
             echo "I hope you remembered to run 'yarn version --prerelease --preid \"$COIN\"'"
             yarn publish --tag "$COIN"
         env:
